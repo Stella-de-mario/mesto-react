@@ -12,14 +12,14 @@ function Card({ card, onCardClick } ) {
         key={card._id}
         onClick={handleClick}
         >
-       <button
+       {/* <button
           className="card__delete-button"
           type="button"
           aria-label="Удалить"
-        ></button>
+        ></button> */}
         <img className="card__image"  src={card.link} alt={card.title} />
         <div className="card__caption">
-          <h2 className="card__title">{card.title}</h2>
+          <h2 className="card__title">{card.name}</h2>
           <div className="card__heart-container">
             <button
               className="card__heart"
