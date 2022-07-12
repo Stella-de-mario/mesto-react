@@ -83,3 +83,4 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
 }
 
 export default Main;
+

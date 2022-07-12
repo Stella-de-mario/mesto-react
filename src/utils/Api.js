@@ -1,5 +1,5 @@
 class Api {
-    constructor({ baseUrl }) {
+    constructor( baseUrl ) {
       this._baseUrl = baseUrl;
       this._headers = {
         authorization: "08894665-6e9a-4a2c-9b4e-7ef096cc96fb",
@@ -29,7 +29,6 @@ class Api {
     }
   
     setNewUserInfo(data) {
-      console.log(data);
       return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
         headers: this._headers,

@@ -8,13 +8,16 @@ function Card({ card, onCardClick } ) {
  
   return (
 
-    <li className="card">
+    <li className="card"
+        key={card._id}
+        onClick={handleClick}
+        >
        <button
           className="card__delete-button"
           type="button"
           aria-label="Удалить"
         ></button>
-        <img className="card__image" onClick={handleClick} src={card.link} alt={card.title} />
+        <img className="card__image"  src={card.link} alt={card.title} />
         <div className="card__caption">
           <h2 className="card__title">{card.title}</h2>
           <div className="card__heart-container">

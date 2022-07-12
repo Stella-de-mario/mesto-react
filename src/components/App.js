@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import ImagePopup from "./ImagePopup.js";
@@ -7,11 +7,11 @@ import Footer from "./Footer.js";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+    useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(false);
-  const [selectedCard, setSelectedCard] = React.useState({});
+    useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -70,7 +70,7 @@ function App() {
         <input
           type="text"
           className="popup__input popup__input-profession"
-          name="profession"
+          name="about"
           minLength="2"
           maxLength="200"
           id="profile-profession"
@@ -134,7 +134,10 @@ function App() {
         buttonText="Да"
       ></PopupWithForm>
 
-      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+      <ImagePopup 
+        onClose={closeAllPopups}
+        card={selectedCard} 
+      />
 
       <Footer />
 
