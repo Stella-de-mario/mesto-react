@@ -3,7 +3,7 @@ import React from "react";
 function ImagePopup({ card, onClose }) {
 
     return (
-        <div className={`popup popup_preview-image ${card.link ? "popup_opened" : ""}`}>
+        <div className={`popup popup_preview-image ${card.link && "popup_opened"}`}>
         <div className="popup__container-image">
           <button
             type="button"
