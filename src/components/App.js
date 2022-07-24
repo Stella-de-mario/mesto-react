@@ -11,7 +11,7 @@ import AddPlacePopup from "./AddPlacePopup.js";
 // import ConfirmationPopup from "./ConfirmationPopup.js";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({name: '', about: ''}); 
+  const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
@@ -20,8 +20,12 @@ function App() {
   const [deleteCard, setDeleteCard] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
- 
-  const isOpen = isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen;
+
+  const isOpen =
+    isAddPlacePopupOpen ||
+    isEditAvatarPopupOpen ||
+    isEditProfilePopupOpen ||
+    isImagePopupOpen;
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
@@ -52,20 +56,20 @@ function App() {
   //   setConfirmationPopupOpen(true);
   //   setDeleteCard(card);
   // }
-  
+
   useEffect(() => {
     function closeByEscape(evt) {
-      if(evt.key === 'Escape') {
+      if (evt.key === "Escape") {
         closeAllPopups();
       }
     }
-    if(isOpen) {
-      document.addEventListener('keydown', closeByEscape);
+    if (isOpen) {
+      document.addEventListener("keydown", closeByEscape);
       return () => {
-        document.removeEventListener('keydown', closeByEscape);
-      }
+        document.removeEventListener("keydown", closeByEscape);
+      };
     }
-  }, [isOpen]) 
+  }, [isOpen]);
 
   function handleUpdateUser(newUserInfo) {
     api
@@ -88,12 +92,12 @@ function App() {
   }
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(item => item._id === currentUser._id);
+    const isLiked = card.likes.some((item) => item._id === currentUser._id);
     api
-    .changeLikeCardStatus(card._id, !isLiked)
+      .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map(c => c._id === card._id ? newCard : c)
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
       .catch((err) => console.log(err));
@@ -101,20 +105,19 @@ function App() {
 
   function handleCardDelete(card) {
     const isOwn = card.owner._id === currentUser._id;
-    if(isOwn) {
+    if (isOwn) {
       api
-      .deleteCard(card._id)
+        .deleteCard(card._id)
         .then(() => {
-          setCards((state) => state.filter((c) => 
-          card._id !== c._id));
-          }) 
+          setCards((state) => state.filter((c) => card._id !== c._id));
+        })
         .catch((err) => console.log(err));
-    }   
-  };
-  
+    }
+  }
+
   function handleAddPlace(card) {
     api
-    .setNewCardsInfo(card)
+      .setNewCardsInfo(card)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
@@ -145,7 +148,6 @@ function App() {
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
           // onConfirmation={handleCardDeleteClick}
-
         />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
@@ -170,11 +172,15 @@ function App() {
           onSubmit={handleCardDelete}
           onConfirmation={handleCardDeleteClick}
         /> */}
-        <ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} card={selectedCard} />
+        <ImagePopup
+          isOpen={isImagePopupOpen}
+          onClose={closeAllPopups}
+          card={selectedCard}
+        />
         <Footer />
       </div>
     </CurrentUserContext.Provider>
-  )
+  );
 }
 
 export default App;
