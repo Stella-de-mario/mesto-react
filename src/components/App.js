@@ -8,20 +8,20 @@ import Footer from "./Footer.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
-import ConfirmationPopup from "./ConfirmationPopup.js";
+// import ConfirmationPopup from "./ConfirmationPopup.js";
 
 function App() {
+  const [currentUser, setCurrentUser] = useState({name: '', about: ''}); 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
-  const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
+  // const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [deleteCard, setDeleteCard] = useState({});
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
-  const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
-
-  const isOpen = isAddPlacePopupOpen || isConfirmationPopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen;
+ 
+  const isOpen = isAddPlacePopupOpen || isEditAvatarPopupOpen || isEditProfilePopupOpen || isImagePopupOpen;
 
   useEffect(() => {
     Promise.all([api.getUserInfo(), api.getCards()])
@@ -48,10 +48,10 @@ function App() {
     setSelectedCard(card);
   }
 
-  function handleCardDeleteClick(card) {
-    setConfirmationPopupOpen(true);
-    setDeleteCard(card);
-  }
+  // function handleCardDeleteClick(card) {
+  //   setConfirmationPopupOpen(true);
+  //   setDeleteCard(card);
+  // }
   
   useEffect(() => {
     function closeByEscape(evt) {
@@ -127,7 +127,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
     setImagePopupOpen(false);
-    setConfirmationPopupOpen(false);
+    // setConfirmationPopupOpen(false);
     setDeleteCard({});
     setSelectedCard({});
   }
@@ -144,7 +144,7 @@ function App() {
           cards={cards}
           onCardLike={handleCardLike}
           onCardDelete={handleCardDelete}
-          onConfirmation={handleCardDeleteClick}
+          // onConfirmation={handleCardDeleteClick}
 
         />
         <EditProfilePopup
@@ -163,13 +163,13 @@ function App() {
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
         />
-        <ConfirmationPopup
+        {/* <ConfirmationPopup
           card={deleteCard}
           isOpen={isConfirmationPopupOpen}
           onClose={closeAllPopups}
           onSubmit={handleCardDelete}
           onConfirmation={handleCardDeleteClick}
-        />
+        /> */}
         <ImagePopup isOpen={isImagePopupOpen} onClose={closeAllPopups} card={selectedCard} />
         <Footer />
       </div>

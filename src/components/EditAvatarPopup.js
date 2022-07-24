@@ -16,6 +16,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
     }
   }, [isOpen]);
   
+  return (
   <PopupWithForm
     name="avatar"
     title="Обновить аватар"
@@ -34,6 +35,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       placeholder="Ссылка на новый аватар"
     />
     <span className="popup__error" id="avatar-link-error" />
-  </PopupWithForm>;
+  </PopupWithForm>
+  )
 }
 export default EditAvatarPopup;
